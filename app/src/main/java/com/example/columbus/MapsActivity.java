@@ -1,29 +1,25 @@
 package com.example.columbus;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.PermissionChecker;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.PermissionChecker;
+import androidx.fragment.app.FragmentActivity;
+import android.content.res.Resources;
+import android.util.Log;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.MapStyleOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -94,7 +90,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             };
             ActivityCompat.requestPermissions(MapsActivity.this, permissons, MY_LOCATION_REQUEST_CODE);
 
-            return;
+            try {
+                // Customise the styling of the base map using a JSON object defined
+                // in a raw resource file.
+                boolean success = googleMap.setMapStyle(
+                        MapStyleOptions.loadRawResourceStyle(
+                                this, R.raw.style_json));
+
+                if (!success) {
+                    Log.e("なんかできないよ", "Style parsing failed.");
+                }
+            } catch (Resources.NotFoundException e) {
+                Log.e("原因不明だよ" , "Can't find style. Error: ", e);
+            }
         }
 
         //mapに現在地マーカーを表示
