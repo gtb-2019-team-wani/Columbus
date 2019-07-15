@@ -1,3 +1,4 @@
 #個人環境で書き換わる隠しフォルダを除外
+Columbus.iml
 .gradle
 .idea
