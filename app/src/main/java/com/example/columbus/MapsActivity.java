@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -16,6 +17,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.FragmentActivity;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, LocationListener {
@@ -55,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     //マップ描画
     public void onMapReady(GoogleMap googleMap) {
-        /*try {
+        try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
@@ -67,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         } catch (Resources.NotFoundException e) {
             Log.e("原因不明だよ", "Can't find style. Error: ", e);
-        }*/
+        }
 
         mMap = googleMap;
         //permissionチェック
@@ -88,20 +91,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //permission許可されてるかとってくる
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         if (requestCode == MY_LOCATION_REQUEST_CODE) {
+            //許可されてる
             if (PermissionChecker.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
                 myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 myLocationManager.requestLocationUpdates(getProvider(), 0, 0, this);
-            } else {
+            }
+            //許可されてない
+            else {
                 Toast.makeText(this, getString(R.string.permission_location_denied), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    //ピンをぶっさす位置変更
     @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(this, "LocationChanged実行" , Toast.LENGTH_SHORT).show();
@@ -138,6 +146,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return myLocationManager.getBestProvider(criteria, true);
     }
 
+    //現在地とっていいか確認
     private void confirmPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
             new AlertDialog.Builder(this)
@@ -159,11 +168,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //初期位置
     private void setDefaultLocation() {
         LatLng tokyo = new LatLng(35.681298, 139.766247);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tokyo, 18));
     }
 
+    //新しい位置を格納
     private void setLocation(Location location) {
         LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(myLocation).title("now Location"));
