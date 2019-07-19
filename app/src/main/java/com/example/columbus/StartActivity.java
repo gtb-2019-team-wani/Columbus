@@ -17,17 +17,17 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
 
-        //gif挿入
+        //gif再生
         ImageView imageView = findViewById(R.id.gifView);
         GlideDrawableImageViewTarget target = new GlideDrawableImageViewTarget(imageView);
         Glide.with(this).load(R.raw.start).into(target);
 
-
+        //startボタン押下でメイン画面に移動
         Button btn = findViewById(R.id.start_button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), MapsActivity.class);
+                Intent intent = new Intent(getApplication(), MainActivity.class);
                 startActivity(intent);
             }
         });

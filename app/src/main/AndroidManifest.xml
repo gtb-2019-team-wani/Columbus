@@ -38,8 +38,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivity">
+        </activity>
+        <activity
+            android:name=".EmblemActivity">
+        </activity>
+        <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
+        </activity>
+        <activity
+            android:name=".SettingActivity">
         </activity>
 
     </application>
