@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="start_button">start</string>
     <string name="style_json">Json</string>
-    <string name="permission_location_rationale_title" />
-    <string name="permission_location_rationale" />
-    <string name="permission_location_denied" />
+    <string name="permission_location_rationale_title">たいとる</string>
+    <string name="permission_location_rationale">めっせーじ</string>
+    <string name="permission_location_denied"></string>
 </resources>
