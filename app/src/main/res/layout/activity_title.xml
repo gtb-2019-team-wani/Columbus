@@ -3,12 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@layout/background">
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="547dp"
+            android:layout_height="880dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="0dp"
+            android:paddingTop="0dp"
+            android:src="@raw/main_bg" />
 
         <ImageView
             android:id="@+id/gifView"

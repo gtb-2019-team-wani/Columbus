@@ -3,8 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
+        <ImageView
+            android:layout_width="547dp"
+            android:layout_height="880dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="0dp"
+            android:paddingTop="0dp"
+            android:src="@raw/main_bg" />
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -13,25 +24,30 @@
             android:id="@+id/left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:text="@string/left_button" />
+            android:layout_weight="1"
+            android:text="@string/left_button"
+            android:background="@layout/background_button_activity"/>
 
         <Button
             android:id="@+id/center_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:text="@string/center_button" />
+            android:layout_weight="1"
+            android:text="@string/center_button"
+            android:background="@layout/background_button_move" />
 
         <Button
             android:id="@+id/right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:text="@string/right_button" />
+            android:layout_weight="1"
+            android:text="@string/right_button"
+            android:background="@layout/background_button_activity" />
 
     </LinearLayout>
+
+    </FrameLayout>
 </LinearLayout>

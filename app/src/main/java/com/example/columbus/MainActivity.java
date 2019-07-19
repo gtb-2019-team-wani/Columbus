@@ -25,15 +25,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btn_center = findViewById(R.id.center_button);
-        btn_center.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), MapsActivity.class);
-                startActivity(intent);
-            }
-        });
-
         Button btn_right = findViewById(R.id.right_button);
         btn_right.setOnClickListener(new View.OnClickListener() {
             @Override
