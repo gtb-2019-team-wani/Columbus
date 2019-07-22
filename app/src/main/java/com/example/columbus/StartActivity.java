@@ -20,7 +20,7 @@ public class StartActivity extends AppCompatActivity {
         //gif再生
         ImageView imageView = findViewById(R.id.gifView);
         GlideDrawableImageViewTarget target = new GlideDrawableImageViewTarget(imageView);
-        Glide.with(this).load(R.raw.start).into(target);
+        Glide.with(this).load(R.drawable.logoani_light).into(target);
 
         //startボタン押下でメイン画面に移動
         Button btn = findViewById(R.id.start_button);

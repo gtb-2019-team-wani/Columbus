@@ -15,14 +15,14 @@
             android:layout_gravity="center"
             android:layout_marginBottom="0dp"
             android:paddingTop="0dp"
-            android:src="@raw/main_bg" />
+            android:src="@drawable/main_bg" />
 
         <ImageView
             android:id="@+id/gifView"
             android:layout_width="match_parent"
             android:layout_height="192dp"
             android:layout_marginTop="80dp"
-            android:src="@raw/start" />
+            android:src="@drawable/logoani_light" />
 
         <ImageView
             android:layout_gravity="center"
@@ -30,14 +30,14 @@
             android:layout_height="376dp"
             android:layout_marginBottom="0dp"
             android:paddingTop="0dp"
-            android:src="@raw/logo_coro" />
+            android:src="@drawable/logo_coro" />
 
         <Button
             android:layout_gravity="center_horizontal"
             android:id="@+id/start_button"
             android:layout_width="240dp"
             android:layout_height="60dp"
-            android:layout_marginTop="530dp"
+            android:layout_marginTop="400dp"
             android:text="@string/start_button"
             android:textSize="35sp"
             android:textColor="#ECECEC"
