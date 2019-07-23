@@ -11,20 +11,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
-public class StartActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_title);
+        setContentView(R.layout.activity_setting);
 
-        //gif再生
-        ImageView imageView = findViewById(R.id.gifView);
-        GlideDrawableImageViewTarget target = new GlideDrawableImageViewTarget(imageView);
-        Glide.with(this).load(R.drawable.logoani_light).into(target);
+        Button btn_left = findViewById(R.id.left_button);
+        btn_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), EmblemActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        //startボタン押下でメイン画面に移動
-        Button btn = findViewById(R.id.start_button);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button btn_center = findViewById(R.id.center_button);
+        btn_center.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), MainActivity.class);
