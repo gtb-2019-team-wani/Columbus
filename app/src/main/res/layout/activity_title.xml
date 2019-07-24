@@ -21,7 +21,7 @@
             android:id="@+id/gifView"
             android:layout_width="match_parent"
             android:layout_height="192dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/logoani_light" />
 
         <ImageView
@@ -32,15 +32,16 @@
             android:paddingTop="0dp"
             android:src="@drawable/logo_coro" />
 
-        <Button
+        <ImageButton
             android:layout_gravity="center_horizontal"
             android:id="@+id/start_button"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="400dp"
-            android:text="@string/start_button"
-            android:textSize="35sp"
-            android:textColor="#ECECEC"
-            android:background="@layout/button_background"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="450dp"
+            android:scaleType="centerInside"
+            android:background="#00000000"
+            android:src="@drawable/startbtn"/>
+
     </FrameLayout>
+
 </LinearLayout>

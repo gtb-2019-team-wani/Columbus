@@ -12,12 +12,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 public class EmblemActivity extends AppCompatActivity {
+
+    private static final int RESULTCODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emblem);
 
-        Button btn_center = findViewById(R.id.center_button);
+        ImageView btn_center = findViewById(R.id.center_button);
         btn_center.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,7 +28,7 @@ public class EmblemActivity extends AppCompatActivity {
             }
         });
 
-        Button btn_right = findViewById(R.id.right_button);
+        ImageView btn_right = findViewById(R.id.right_button);
         btn_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

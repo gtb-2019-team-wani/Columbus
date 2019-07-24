@@ -17,7 +17,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        Button btn_left = findViewById(R.id.left_button);
+        ImageView btn_left = findViewById(R.id.left_button);
         btn_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,7 +26,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        Button btn_center = findViewById(R.id.center_button);
+        ImageView btn_center = findViewById(R.id.center_button);
         btn_center.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
