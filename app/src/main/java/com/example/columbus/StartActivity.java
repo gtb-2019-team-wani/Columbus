@@ -23,7 +23,7 @@ public class StartActivity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.logoani_light).into(target);
 
         //startボタン押下でメイン画面に移動
-        Button btn = findViewById(R.id.start_button);
+        ImageView btn = findViewById(R.id.start_button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

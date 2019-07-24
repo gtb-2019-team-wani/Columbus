@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,39 +16,54 @@
             android:paddingTop="0dp"
             android:src="@drawable/main_bg" />
 
+        <ImageView
+            android:id="@+id/gifView"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:src="@drawable/logoani_mini" />
+
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/left_button"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:layout_gravity="bottom"
+                android:background="#00000000"
+                android:src="@drawable/btn1" />
+            <ImageButton
+                android:id="@+id/center_button"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:layout_gravity="bottom"
+                android:background="#00000000"
+                android:src="@drawable/btn6" />
+            <ImageButton
+                android:id="@+id/right_button"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:layout_gravity="bottom"
+                android:background="#00000000"
+                android:src="@drawable/btn5" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/left_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:text="@string/left_button"
-            android:background="@layout/background_button_activity"/>
-
-        <Button
-            android:id="@+id/center_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:text="@string/center_button"
-            android:background="@layout/background_button_move" />
-
-        <Button
-            android:id="@+id/right_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:text="@string/right_button"
-            android:background="@layout/background_button_activity" />
-
-    </LinearLayout>
+        <fragment
+            android:id="@+id/mapFragment"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100sp"
+            android:layout_width="350sp"
+            android:layout_height="380sp" />
 
     </FrameLayout>
+
 </LinearLayout>
