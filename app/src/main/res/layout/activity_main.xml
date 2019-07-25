@@ -66,6 +66,19 @@
             android:layout_width="350sp"
             android:layout_height="380sp" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            
+            android:scaleY="2.5"
+            android:scaleX="2.5"
+            android:layout_marginTop="100sp"
+            android:layout_marginLeft="30sp"
+            android:max="100"
+            android:progress="100"/>
+
 
     </FrameLayout>
 
