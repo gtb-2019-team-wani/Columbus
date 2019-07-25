@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Criteria;
@@ -13,6 +14,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,6 +44,54 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int MY_LOCATION_REQUEST_CODE = 0;
     private LocationManager myLocationManager;
     private GoogleMap mMap;
+    public static final int PREFERENCE_INIT = 0;
+    public static final int PREFERENCE_BOOTED = 1;
+    public static final int MENU_SELECT_CLEAR = 0;
+    //データ保存
+    private void setState(int state) {
+        // SharedPreferences設定を保存
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp.edit().putInt("InitState", state).commit();
+
+    }
+    //データ読み出し
+    private int getState() {
+        // 読み込み
+        int state;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        state = sp.getInt("InitState", PREFERENCE_INIT);
+
+        return state;
+    }
+    //ダイアログ表示
+    @Override
+    public void onResume(){
+        super.onResume();
+
+    }
+
+    ////////////////////////////////////////////////////////////////
+    //初回のデータを削除するところ
+    //メニュー作成
+    public boolean onCreateOptionsMenu(Menu menu){
+        //Clearボタンの追加
+        menu.add(0, MENU_SELECT_CLEAR, 0, "Clear")
+                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+
+        return true;
+    }
+
+    //メニュー実行時の処理
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_SELECT_CLEAR:
+                //状態を忘れる
+                setState(PREFERENCE_INIT);
+                return true;
+        }
+        return false;
+    }
+    ////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,23 +104,35 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
 
+        //左のボタンを押したときの処理
         ImageView btn_left = findViewById(R.id.left_button);
         btn_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), EmblemActivity.class);
                 startActivity(intent);
+
             }
         });
 
+        //右のボタンを押したときの処理
         ImageView btn_right = findViewById(R.id.right_button);
         btn_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), SettingActivity.class);
                 startActivity(intent);
+
             }
         });
+        if (getState() == PREFERENCE_INIT){
+
+            setState(PREFERENCE_BOOTED);
+            Intent intent = new Intent(getApplication(), ThankActivity.class);
+            startActivity(intent);
+        }
+        //Intent intent = new Intent(getApplication(), ThankActivity.class);
+        //startActivity(intent);
     }
 
 
