@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -18,26 +19,21 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.PermissionChecker;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,ActivityCompat.OnRequestPermissionsResultCallback,LocationListener {
 
@@ -164,9 +160,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Location lastLocation = myLocationManager.getLastKnownLocation(provider);
             if(lastLocation != null) {
                 setLocation(lastLocation);
+                drawRoute();
             }
             mMap.setMyLocationEnabled(true);
-            Toast.makeText(this, "Provider=" + provider, Toast.LENGTH_SHORT).show();
             myLocationManager.requestLocationUpdates(provider, 0, 0, (LocationListener) this);
         } else {
             setDefaultLocation();
@@ -189,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             //許可されてない
             else {
-                Toast.makeText(this, getString(R.string.permission_location_denied), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -197,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //ピンをぶっさす位置変更
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, "LocationChanged実行" , Toast.LENGTH_SHORT).show();
         setLocation(location);
         try {
             myLocationManager.removeUpdates((LocationListener) this);
@@ -260,8 +254,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //新しい位置を格納
     private void setLocation(Location location) {
-        LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng myLocation = new LatLng(35.6550,139.6998);
         mMap.addMarker(new MarkerOptions().position(myLocation).title("now Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18));
+    }
+
+    private void drawRoute(){
+        Polyline options = mMap.addPolyline((new PolylineOptions())
+          .add(
+                  new LatLng(35.6563229,139.6994060),
+                  new LatLng(35.6563228,139.6994060),
+                  new LatLng(35.6563228,139.6994059),
+                  new LatLng(35.6550,139.6998)
+          ).color(Color.rgb(255,225,0))
+        );
     }
 }
