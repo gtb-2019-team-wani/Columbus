@@ -36,5 +36,50 @@ public class EmblemActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ImageView btn01 = findViewById(R.id.imageButton);
+        btn01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), ThankActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView btn02 = findViewById(R.id.imageButton2);
+        btn02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), GreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView btn03 = findViewById(R.id.imageButton3);
+        btn03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), DefenceActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView btn04 = findViewById(R.id.imageButton4);
+        btn04.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), GreatActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView btn05 = findViewById(R.id.imageButton5);
+        btn05.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), CoolActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

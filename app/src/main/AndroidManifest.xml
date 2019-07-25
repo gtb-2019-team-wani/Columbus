@@ -50,7 +50,21 @@
         <activity
             android:name=".SettingActivity">
         </activity>
-
+        <activity android:name=".ThankActivity"
+            android:theme="@style/Theme.TranslucentBackground">
+        </activity>
+        <activity android:name=".GreenActivity"
+            android:theme="@style/Theme.TranslucentBackground">
+        </activity>
+        <activity android:name=".DefenceActivity"
+            android:theme="@style/Theme.TranslucentBackground">
+        </activity>
+        <activity android:name=".GreatActivity"
+            android:theme="@style/Theme.TranslucentBackground">
+        </activity>
+        <activity android:name=".CoolActivity"
+            android:theme="@style/Theme.TranslucentBackground">
+        </activity>
     </application>
 
 </manifest>
