@@ -27,6 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback, LocationListener {
 
@@ -79,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
             String provider = getProvider();
             Location lastLocation = myLocationManager.getLastKnownLocation(provider);
-            if(lastLocation != null) {
+            if (lastLocation != null) {
                 setLocation(lastLocation);
             }
             mMap.setMyLocationEnabled(true);
@@ -112,11 +113,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //ピンをぶっさす位置変更
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, "LocationChanged実行" , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "LocationChanged実行", Toast.LENGTH_SHORT).show();
         setLocation(location);
         try {
             myLocationManager.removeUpdates(this);
-        } catch(SecurityException e) {
+        } catch (SecurityException e) {
         }
     }
 
@@ -137,7 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onDestroy();
         try {
             myLocationManager.removeUpdates(this);
-        } catch(SecurityException e) {
+        } catch (SecurityException e) {
         }
     }
 
@@ -179,5 +180,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(myLocation).title("now Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18));
+    }
+
+    //あるいた距離を取得する
+    //起動時の位置情報を取得して保存
+    //位置情報の差分を知りたい
+    //現在の位置情報を取り直す
+    //２点間の情報をとる
+
+    /**
+     * あるいた距離を取得する
+     *
+     * @return 2点間の距離
+     */
+    private double calcDistance() {
+        //現在の位置を取得して、latLngFromにいれる
+        final LatLng latLngFrom = new LatLng(35.681236, 139.767125);
+        //現在の位置を取得して、latLngToにいれる
+        final LatLng latLngTo = new LatLng(34.7331, 135.5002);
+
+        //FromとToの2点間の距離を算出してdistanceにいれる
+        double distance = SphericalUtil.computeDistanceBetween(latLngFrom,latLngTo);
+        return distance;
     }
 }
