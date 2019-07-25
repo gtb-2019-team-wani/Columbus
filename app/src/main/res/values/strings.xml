@@ -9,4 +9,5 @@
     <string name="permission_location_rationale_title">たいとる</string>
     <string name="permission_location_rationale">めっせーじ</string>
     <string name="permission_location_denied"></string>
+    <string name="ThankActivity"></string>
 </resources>
