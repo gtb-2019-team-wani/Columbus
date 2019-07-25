@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                   new LatLng(35.6563228,139.6994060),
                   new LatLng(35.6563228,139.6994059),
                   new LatLng(35.6550,139.6998)
-          ).color(Color.rgb(255,225,0))
+          ).color(Color.rgb(255,225,0)).width(40)
         );
     }
 }
