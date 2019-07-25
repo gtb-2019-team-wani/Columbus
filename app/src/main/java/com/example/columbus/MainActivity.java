@@ -5,41 +5,89 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.PermissionChecker;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,ActivityCompat.OnRequestPermissionsResultCallback,LocationListener {
 
     private static final int MY_LOCATION_REQUEST_CODE = 0;
     private LocationManager myLocationManager;
     private GoogleMap mMap;
+    public static final int PREFERENCE_INIT = 0;
+    public static final int PREFERENCE_BOOTED = 1;
+    public static final int MENU_SELECT_CLEAR = 0;
+    //データ保存
+    private void setState(int state) {
+        // SharedPreferences設定を保存
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp.edit().putInt("InitState", state).commit();
+
+    }
+    //データ読み出し
+    private int getState() {
+        // 読み込み
+        int state;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        state = sp.getInt("InitState", PREFERENCE_INIT);
+
+        return state;
+    }
+    //ダイアログ表示
+    @Override
+    public void onResume(){
+        super.onResume();
+
+    }
+
+    ////////////////////////////////////////////////////////////////
+    //初回のデータを削除するところ
+    //メニュー作成
+    public boolean onCreateOptionsMenu(Menu menu){
+        //Clearボタンの追加
+        menu.add(0, MENU_SELECT_CLEAR, 0, "Clear")
+                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+
+        return true;
+    }
+
+    //メニュー実行時の処理
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_SELECT_CLEAR:
+                //状態を忘れる
+                setState(PREFERENCE_INIT);
+                return true;
+        }
+        return false;
+    }
+    ////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,23 +100,35 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
 
+        //左のボタンを押したときの処理
         ImageView btn_left = findViewById(R.id.left_button);
         btn_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), EmblemActivity.class);
                 startActivity(intent);
+
             }
         });
 
+        //右のボタンを押したときの処理
         ImageView btn_right = findViewById(R.id.right_button);
         btn_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), SettingActivity.class);
                 startActivity(intent);
+
             }
         });
+        if (getState() == PREFERENCE_INIT){
+
+            setState(PREFERENCE_BOOTED);
+            Intent intent = new Intent(getApplication(), ThankActivity.class);
+            startActivity(intent);
+        }
+        //Intent intent = new Intent(getApplication(), ThankActivity.class);
+        //startActivity(intent);
     }
 
 
@@ -100,9 +160,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Location lastLocation = myLocationManager.getLastKnownLocation(provider);
             if(lastLocation != null) {
                 setLocation(lastLocation);
+                drawRoute();
             }
             mMap.setMyLocationEnabled(true);
-            Toast.makeText(this, "Provider=" + provider, Toast.LENGTH_SHORT).show();
             myLocationManager.requestLocationUpdates(provider, 0, 0, (LocationListener) this);
         } else {
             setDefaultLocation();
@@ -125,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             //許可されてない
             else {
-                Toast.makeText(this, getString(R.string.permission_location_denied), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -133,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //ピンをぶっさす位置変更
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, "LocationChanged実行" , Toast.LENGTH_SHORT).show();
         setLocation(location);
         try {
             myLocationManager.removeUpdates((LocationListener) this);
@@ -196,8 +254,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //新しい位置を格納
     private void setLocation(Location location) {
-        LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng myLocation = new LatLng(35.6550,139.6998);
         mMap.addMarker(new MarkerOptions().position(myLocation).title("now Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18));
+    }
+
+    private void drawRoute(){
+        Polyline options = mMap.addPolyline((new PolylineOptions())
+          .add(
+                  new LatLng(35.6563229,139.6994060),
+                  new LatLng(35.6563228,139.6994060),
+                  new LatLng(35.6563228,139.6994059),
+                  new LatLng(35.6550,139.6998)
+          ).color(Color.rgb(255,225,0))
+        );
     }
 }
