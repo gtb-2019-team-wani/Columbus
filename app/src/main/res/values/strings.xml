@@ -6,6 +6,7 @@
     <string name="center_button">main</string>
     <string name="right_button">set</string>
     <string name="style_json">Json</string>
+    <string name="style2_json">Json2</string>
     <string name="permission_location_rationale_title">たいとる</string>
     <string name="permission_location_rationale">めっせーじ</string>
     <string name="permission_location_denied"></string>

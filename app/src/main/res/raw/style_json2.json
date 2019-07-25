@@ -1,0 +1,18 @@
+[
+  {
+    "featureType": "all",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType":"all",
+    "elementType":"labels",
+    "stylers":[
+      { "visibility": "off" }
+    ]
+  }
+]
