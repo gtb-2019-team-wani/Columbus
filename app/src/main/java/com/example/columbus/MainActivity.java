@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.style_json2));
+                            this, R.raw.style_json));
 
             if (!success) {
                 Log.e("なんかできないよ", "Style parsing failed.");
@@ -263,9 +263,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void drawRoute(){
         Polyline options = mMap.addPolyline((new PolylineOptions())
           .add(
+                  //緯度と経度
                   new LatLng(35.6563229,139.6994060),
                   new LatLng(35.6563228,139.6994060),
                   new LatLng(35.6563228,139.6994059),
+                  //現在地
+                  //setlocationが同じになる
                   new LatLng(35.6550,139.6998)
           ).color(Color.rgb(255,225,0)).width(40)
         );

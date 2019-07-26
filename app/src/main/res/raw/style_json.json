@@ -1,16 +1,9 @@
 [
   {
     "featureType":"all",
-    "elementType":"labels.text.stroke",
+    "elementType":"labels",
     "stylers":[
-      { "color":"#000000" }
-    ]
-  },
-  {
-    "featureType":"all",
-    "elementType":"labels.text.fill",
-    "stylers":[
-      { "color":"#ffffff" }
+      { "visibility": "off" }
     ]
   },
   {
@@ -45,28 +38,28 @@
     "featureType":"water",
     "elementType":"geometry",
     "stylers":[
-      { "color":"#BDD8EB" }
+      { "color":"#F4F5F4" }
     ]
   },
   {
     "featureType":"landscape",
     "elementType":"geometry",
     "stylers":[
-      { "color":"#E5E5E5" }
+      { "color":"#F4F5F4" }
     ]
   },
   {
     "featureType":"poi",
     "elementType":"geometry",
     "stylers":[
-      { "color":"#E5E5E5" }
+      { "color":"#F4F5F4" }
     ]
   },
   {
     "featureType":"poi.park",
     "elementType":"geometry",
     "stylers":[
-      { "color":"#A9D06B" }
+      { "color":"#F4F5F4" }
     ]
   }
 ]
