@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +16,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="0dp"
             android:paddingTop="0dp"
-            android:src="@drawable/main_bg" />
+            android:background="#F1F1F1" />
 
         <ImageView
             android:id="@+id/gifView"
@@ -61,23 +62,48 @@
         <fragment
             android:id="@+id/mapView"
             android:name="com.google.android.gms.maps.SupportMapFragment"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100sp"
             android:layout_width="350sp"
-            android:layout_height="380sp" />
+            android:layout_height="440sp"
+            android:background="@drawable/activity_map_design"
+            tools:context=".MainActivity"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="125sp"
+            android:layout_height="125sp"
+            android:layout_marginTop="60sp"
+            android:layout_marginLeft="0sp"
+            app:srcCompat="@drawable/crossing_rate" />
 
         <ProgressBar
             android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            
-            android:scaleY="2.5"
-            android:scaleX="2.5"
+            android:layout_marginLeft="37sp"
             android:layout_marginTop="100sp"
-            android:layout_marginLeft="30sp"
-            android:max="100"
-            android:progress="100"/>
+            android:background="@drawable/bg_progress"
+            android:progressDrawable="@drawable/circle_progress"
+            android:scaleX="2.5"
+            android:scaleY="2.5"
+            android:progress="25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/crossing_rate"
+            android:layout_marginLeft="34sp"
+            android:layout_marginTop="96sp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="#7d7d7d"/>
 
 
     </FrameLayout>
