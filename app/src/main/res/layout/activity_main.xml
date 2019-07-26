@@ -85,12 +85,27 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="37sp"
             android:layout_marginTop="100sp"
-            android:max="100"
-            android:progress="100"
             android:background="@drawable/bg_progress"
             android:progressDrawable="@drawable/circle_progress"
             android:scaleX="2.5"
-            android:scaleY="2.5" />
+            android:scaleY="2.5"
+            android:progress="25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/crossing_rate"
+            android:layout_marginLeft="34sp"
+            android:layout_marginTop="96sp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="#7d7d7d"/>
+
+
     </FrameLayout>
 
 </LinearLayout>
