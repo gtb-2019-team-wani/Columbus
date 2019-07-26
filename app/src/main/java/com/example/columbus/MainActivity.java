@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //新しい位置を格納
     private void setLocation(Location location) {
-        LatLng myLocation = new LatLng(35.6550,139.6998);
+        LatLng myLocation = new LatLng(35.656309,139.699444);
         mMap.addMarker(new MarkerOptions().position(myLocation).title("now Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18));
     }
@@ -263,11 +263,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void drawRoute(){
         Polyline options = mMap.addPolyline((new PolylineOptions())
           .add(
-                  new LatLng(35.6563229,139.6994060),
-                  new LatLng(35.6563228,139.6994060),
-                  new LatLng(35.6563228,139.6994059),
-                  new LatLng(35.6550,139.6998)
-          ).color(Color.rgb(255,225,0))
+                  //緯度と経度
+                  new LatLng(35.658032,139.701295),
+                  new LatLng(35.657295,139.701124),
+                  new LatLng(35.656688,139.699310),
+                  //new LatLng(35.656642,139.699062),
+                  //現在地
+                  //setlocationが同じになる
+                  new LatLng(35.656309	,139.699444)
+          ).color(Color.rgb(241,142,142)).width(40)
         );
     }
 }
