@@ -78,14 +78,5 @@ public class EmblemActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        ImageView btn05 = findViewById(R.id.imageButton5);
-        btn05.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), CoolActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
