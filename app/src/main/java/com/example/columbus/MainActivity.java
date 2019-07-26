@@ -36,6 +36,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,ActivityCompat.OnRequestPermissionsResultCallback,LocationListener {
 
     private static final int MY_LOCATION_REQUEST_CODE = 0;
@@ -261,17 +263,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void drawRoute(){
+        ArrayList<LatLng> positions = new ArrayList<>();
+        //Line表示する緯度経度の設定
+        //最後の地点と現在地は同じにする
+        positions.add(new LatLng(35.658032,139.701295));
+        positions.add(new LatLng(35.657295,139.701124));
+        positions.add(new LatLng(35.656688,139.699310));
+        positions.add(new LatLng(35.656309	,139.699444));
+
         Polyline options = mMap.addPolyline((new PolylineOptions())
-          .add(
-                  //緯度と経度
-                  new LatLng(35.658032,139.701295),
-                  new LatLng(35.657295,139.701124),
-                  new LatLng(35.656688,139.699310),
-                  //new LatLng(35.656642,139.699062),
-                  //現在地
-                  //setlocationが同じになる
-                  new LatLng(35.656309	,139.699444)
-          ).color(Color.rgb(241,142,142)).width(40)
+          .addAll(positions).color(Color.rgb(241,142,142)).width(40)
         );
+
+/*        float[] result = new float[positions.size()];
+        for(int i = 0; i < positions.size(); i++){
+            Location.distanceBetween(positions.get(i).latitude,positions.get(i).longitude,positions.get(i+1).latitude,positions.get(i+1).longitude,result);
+        }*/
     }
 }
