@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onResume(){
         super.onResume();
+
         //PREFERENCE_INIT=0(初回起動なら)使い方
         if (getState() == PREFERENCE_INIT) {
             setState(PREFERENCE_USING);
@@ -84,12 +86,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             startActivity(intent1);
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ProgressBar circle = (ProgressBar)findViewById(R.id.progressBar);
+        circle.setMax(100);
+        circle.setProgress(100 - 80);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
@@ -261,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
           .addAll(positions).color(Color.rgb(241,142,142)).width(40)
         );
 
-/*        float[] result = new float[positions.size()];
+        /*float[] result = new float[positions.size()];
         for(int i = 0; i < positions.size(); i++){
             Location.distanceBetween(positions.get(i).latitude,positions.get(i).longitude,positions.get(i+1).latitude,positions.get(i+1).longitude,result);
         }*/
