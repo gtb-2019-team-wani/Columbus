@@ -54,7 +54,7 @@
                             android:layout_weight="1"
                             android:background="#00000000"
                             android:scaleType="centerInside"
-                            android:src="@drawable/em002" />
+                            android:src="@drawable/em000" />
 
                         <ImageButton
                             android:id="@+id/imageButton3"
@@ -63,7 +63,7 @@
                             android:layout_weight="1"
                             android:background="#00000000"
                             android:scaleType="centerInside"
-                            android:src="@drawable/em003" />
+                            android:src="@drawable/em000" />
                     </TableRow>
 
                     <TableRow
@@ -78,7 +78,7 @@
                             android:layout_weight="1"
                             android:background="#00000000"
                             android:scaleType="centerInside"
-                            android:src="@drawable/em004" />
+                            android:src="@drawable/em000" />
 
                         <ImageButton
                             android:id="@+id/imageButton5"
@@ -87,7 +87,7 @@
                             android:layout_weight="1"
                             android:background="#00000000"
                             android:scaleType="centerInside"
-                            android:src="@drawable/em005" />
+                            android:src="@drawable/em000" />
 
                         <ImageButton
                             android:id="@+id/imageButton6"
