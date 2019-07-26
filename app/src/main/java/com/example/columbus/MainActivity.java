@@ -41,12 +41,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,ActivityCompat.OnRequestPermissionsResultCallback,LocationListener {
 
-    private static final int MY_LOCATION_REQUEST_CODE = 0;
+    public static final int MY_LOCATION_REQUEST_CODE = 0;
     private LocationManager myLocationManager;
     private GoogleMap mMap;
     public static final int PREFERENCE_INIT = 0;
     public static final int PREFERENCE_BOOTED = 1;
+    public static final int PREFERENCE_PARMISSION = 2;
+    public static final int PREFERENCE_USENG = 3;
     public static final int MENU_SELECT_CLEAR = 0;
+
     //データ保存
     private void setState(int state) {
         // SharedPreferences設定を保存
@@ -63,11 +66,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         return state;
     }
+
     //ダイアログ表示
     @Override
     public void onResume(){
         super.onResume();
-
     }
 
     ////////////////////////////////////////////////////////////////
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
-    //メニュー実行時の処理
+    //メニュー実行時の処
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_SELECT_CLEAR:
@@ -91,12 +94,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         return false;
     }
+
+
     ////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         ProgressBar circle = (ProgressBar)findViewById(R.id.progressBar);
         circle.setMax(100);
@@ -127,12 +133,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
-        if (getState() == PREFERENCE_INIT){
+            /* if (getState() == PREFERENCE_INIT) {
 
-            setState(PREFERENCE_BOOTED);
-            Intent intent = new Intent(getApplication(), ThankActivity.class);
-            startActivity(intent);
-        }
+                setState(PREFERENCE_BOOTED);
+                Intent intent = new Intent(getApplication(), ThankActivity.class);
+                startActivity(intent);
+            } */
         //Intent intent = new Intent(getApplication(), ThankActivity.class);
         //startActivity(intent);
     }
@@ -188,6 +194,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.setMyLocationEnabled(true);
                 myLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
                 myLocationManager.requestLocationUpdates(getProvider(), 0, 0, (LocationListener) this);
+
+                //helpに飛ばす
+                //setStatehelp
             }
             //許可されてない
             else {
@@ -233,18 +242,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //現在地とっていいか確認
     private void confirmPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.permission_location_rationale_title)
-                    .setMessage(R.string.permission_location_rationale)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
                             ActivityCompat.requestPermissions(MainActivity.this,
                                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                     MY_LOCATION_REQUEST_CODE);
-                        }
-                    })
-                    .show();
         } else {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
