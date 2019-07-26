@@ -44,9 +44,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager myLocationManager;
     private GoogleMap mMap;
     public static final int PREFERENCE_INIT = 0;
-    public static final int PREFERENCE_BOOTED = 1;
-    public static final int PREFERENCE_PARMISSION = 2;
-    public static final int PREFERENCE_USENG = 3;
+    public static final int PREFERENCE_USING = 1;
+    public static final int PREFERENCE_EMBLEM = 2;
+    //public static final int PREFERENCE_BOOTED = 3;
+
     public static final int MENU_SELECT_CLEAR = 0;
 
     //データ保存
@@ -70,32 +71,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onResume(){
         super.onResume();
-    }
-
-    ////////////////////////////////////////////////////////////////
-    //初回のデータを削除するところ
-    //メニュー作成
-    public boolean onCreateOptionsMenu(Menu menu){
-        //Clearボタンの追加
-        menu.add(0, MENU_SELECT_CLEAR, 0, "Clear")
-                .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
-
-        return true;
-    }
-
-    //メニュー実行時の処
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_SELECT_CLEAR:
-                //状態を忘れる
-                setState(PREFERENCE_INIT);
-                return true;
+        //PREFERENCE_INIT=0(初回起動なら)使い方
+        if (getState() == PREFERENCE_INIT) {
+            setState(PREFERENCE_USING);
+            Intent intent = new Intent(getApplication(), StartDescriptionActivity.class);
+            startActivity(intent);
         }
-        return false;
+        //使い方のあとはエンブレム
+        else if (getState() == PREFERENCE_USING) {
+            setState(PREFERENCE_EMBLEM);
+            Intent intent1 = new Intent(getApplication(), ThankActivity.class);
+            startActivity(intent1);
+        }
     }
-
-
-    ////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
