@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.columbus">
 
     <!--
@@ -16,6 +17,11 @@
         android:roundIcon="@mipmap/icon_columbus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--
+        実機テストしたかったら↑に追加する
+             android:debuggable="true"
+             tools:ignore="HardcodedDebugMode"-->
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
