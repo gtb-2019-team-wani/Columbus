@@ -68,6 +68,9 @@
         <activity android:name=".CoolActivity"
             android:theme="@style/Theme.TranslucentBackground">
         </activity>
+        <activity android:name=".StartDescriptionActivity"
+            android:theme="@style/Theme.TranslucentBackground">
+        </activity>
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
